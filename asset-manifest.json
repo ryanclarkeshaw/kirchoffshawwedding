@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/shawkirchoffwedding/static/css/main.4740e181.css",
+    "main.js": "/shawkirchoffwedding/static/js/main.648dfd51.js",
+    "static/js/453.7e3e3be8.chunk.js": "/shawkirchoffwedding/static/js/453.7e3e3be8.chunk.js",
+    "index.html": "/shawkirchoffwedding/index.html",
+    "main.4740e181.css.map": "/shawkirchoffwedding/static/css/main.4740e181.css.map",
+    "main.648dfd51.js.map": "/shawkirchoffwedding/static/js/main.648dfd51.js.map",
+    "453.7e3e3be8.chunk.js.map": "/shawkirchoffwedding/static/js/453.7e3e3be8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4740e181.css",
+    "static/js/main.648dfd51.js"
+  ]
+}
