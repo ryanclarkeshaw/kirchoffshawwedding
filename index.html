@@ -1,1 +1,746 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="/shawkirchoffwedding/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="description" content="Web site created using create-react-app"/><link rel="apple-touch-icon" href="/shawkirchoffwedding/logo192.png"/><link rel="manifest" href="/shawkirchoffwedding/manifest.json"/><title>React App</title><script defer="defer" src="/shawkirchoffwedding/static/js/main.648dfd51.js"></script><link href="/shawkirchoffwedding/static/css/main.4740e181.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emma & James - Wedding Celebration</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            color: #333;
+            background-color: #f0f9f0;
+            line-height: 1.6;
+        }
+        
+        /* Colors */
+        :root {
+            --dark-green: #064e3b;
+            --medium-green: #065f46;
+            --light-green: #d1fae5;
+            --lavender: #c084fc;
+            --light-lavender: #ddd6fe;
+            --white: #ffffff;
+        }
+        
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-weight: 300;
+            line-height: 1.2;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--lavender);
+            color: var(--dark-green);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--light-lavender);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            color: var(--white);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, var(--dark-green), #5b21b6);
+            opacity: 0.9;
+            z-index: -2;
+        }
+        
+        .hero::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://source.unsplash.com/random/1200x800/?nature,forest');
+            background-size: cover;
+            background-position: center;
+            mix-blend-mode: overlay;
+            z-index: -1;
+        }
+        
+        .hero h1 {
+            font-size: 60px;
+            margin-bottom: 20px;
+            letter-spacing: 3px;
+        }
+        
+        .hero p {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+        
+        .hero .date {
+            font-size: 28px;
+            margin-bottom: 40px;
+        }
+        
+        /* Navigation */
+        .navbar {
+            position: sticky;
+            top: 0;
+            background-color: var(--dark-green);
+            color: var(--white);
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar .logo {
+            font-size: 22px;
+        }
+        
+        .navbar .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .navbar .nav-link {
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .navbar .nav-link:hover {
+            background-color: var(--medium-green);
+        }
+        
+        .navbar .nav-link.rsvp {
+            background-color: var(--lavender);
+            color: var(--dark-green);
+        }
+        
+        .navbar .nav-link.rsvp:hover {
+            background-color: var(--light-lavender);
+        }
+        
+        .mobile-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Our Story Section */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            font-size: 36px;
+            text-align: center;
+            color: var(--dark-green);
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--lavender);
+        }
+        
+        .story-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .story-image {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .story-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .story-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .story-text p {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        /* Details Section */
+        .details {
+            background: linear-gradient(to bottom, var(--dark-green), var(--medium-green));
+            color: var(--white);
+        }
+        
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .details-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .details-card h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--light-lavender);
+        }
+        
+        .details-card p {
+            margin-bottom: 10px;
+        }
+        
+        .details-card span {
+            color: var(--lavender);
+            font-weight: bold;
+        }
+        
+        .details .cta {
+            margin-top: 60px;
+            text-align: center;
+        }
+        
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background-color: var(--white);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item img:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--dark-green);
+            color: var(--white);
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer p:first-child {
+            margin-bottom: 20px;
+            color: var(--light-lavender);
+        }
+        
+        .footer p:last-child {
+            opacity: 0.7;
+            font-size: 14px;
+        }
+        
+        /* RSVP Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background-color: var(--white);
+            width: 100%;
+            max-width: 500px;
+            border-radius: 10px;
+            overflow: auto;
+            max-height: 90vh;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .modal-header h3 {
+            font-size: 24px;
+            color: var(--dark-green);
+        }
+        
+        .close-modal {
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: #333;
+        }
+        
+        .modal-body {
+            padding: 20px;
+        }
+        
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--lavender);
+            box-shadow: 0 0 0 2px rgba(192, 132, 252, 0.3);
+        }
+        
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 40px;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--dark-green);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--medium-green);
+        }
+        
+        .success-message {
+            text-align: center;
+            padding: 30px 20px;
+        }
+        
+        .success-icon {
+            color: #10b981;
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .success-title {
+            font-size: 24px;
+            color: var(--dark-green);
+            margin-bottom: 15px;
+        }
+        
+        .success-text {
+            color: #666;
+            margin-bottom: 25px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 40px;
+            }
+            
+            .hero p, .hero .date {
+                font-size: 18px;
+            }
+            
+            .navbar .container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .navbar .logo {
+                margin-bottom: 15px;
+            }
+            
+            .navbar .nav-links {
+                flex-direction: column;
+                width: 100%;
+                gap: 8px;
+            }
+            
+            .mobile-toggle {
+                display: block;
+                position: absolute;
+                right: 20px;
+                top: 15px;
+            }
+            
+            .navbar .nav-links {
+                display: none;
+            }
+            
+            .navbar .nav-links.active {
+                display: flex;
+            }
+            
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Emma & James</h1>
+            <p>are getting married</p>
+            <div class="date">September 15, 2025</div>
+            <a href="#details" class="btn btn-primary">Our Special Day</a>
+        </div>
+    </section>
+    
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">E & J</div>
+            <div class="mobile-toggle" id="menuToggle">☰</div>
+            <div class="nav-links" id="navLinks">
+                <a href="#story" class="nav-link">Our Story</a>
+                <a href="#details" class="nav-link">Details</a>
+                <a href="#gallery" class="nav-link">Gallery</a>
+                <a href="#" class="nav-link rsvp" id="rsvpBtn">RSVP</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Our Story Section -->
+    <section class="section" id="story">
+        <div class="container">
+            <h2 class="section-title">Our Story</h2>
+            <div class="story-content">
+                <div class="story-image">
+                    <img src="https://source.unsplash.com/random/600x600/?couple,nature" alt="Emma and James">
+                </div>
+                <div class="story-text">
+                    <p>We met on a hiking trail in the spring of 2021. James was photographing wildflowers, and Emma was sketching landscapes. Our mutual love for nature sparked a conversation that hasn't ended since.</p>
+                    <p>Two years later, under a canopy of stars in the same forest where we first met, James proposed. Now we invite you to join us as we begin our greatest adventure together.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Event Details Section -->
+    <section class="section details" id="details">
+        <div class="container">
+            <h2 class="section-title">Wedding Details</h2>
+            <div class="details-grid">
+                <div class="details-card">
+                    <h3>Ceremony</h3>
+                    <p><span>Date:</span> September 15, 2025</p>
+                    <p><span>Time:</span> 3:00 PM</p>
+                    <p><span>Location:</span> Wildflower Gardens</p>
+                    <p><span>Address:</span> 123 Forest Lane, Natureville</p>
+                </div>
+                <div class="details-card">
+                    <h3>Reception</h3>
+                    <p><span>Time:</span> 5:00 PM</p>
+                    <p><span>Location:</span> The Green Pavilion</p>
+                    <p><span>Address:</span> Same as ceremony</p>
+                    <p><span>Dress Code:</span> Garden Formal</p>
+                </div>
+            </div>
+            <div class="cta">
+                <button class="btn btn-primary" id="rsvpBtnDetails">RSVP Now</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Gallery Section -->
+    <section class="section" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Our Gallery</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://source.unsplash.com/random/400x300/?nature,forest" alt="Nature photo 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://source.unsplash.com/random/400x301/?nature,flowers" alt="Nature photo 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://source.unsplash.com/random/400x302/?nature,mountains" alt="Nature photo 3">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://source.unsplash.com/random/400x303/?nature,river" alt="Nature photo 4">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://source.unsplash.com/random/400x304/?nature,trees" alt="Nature photo 5">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://source.unsplash.com/random/400x305/?nature,lake" alt="Nature photo 6">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>We can't wait to celebrate with you!</p>
+            <p>© 2025 Emma & James Wedding</p>
+        </div>
+    </footer>
+    
+    <!-- RSVP Modal -->
+    <div class="modal" id="rsvpModal">
+        <div class="modal-content">
+            <div id="rsvpForm">
+                <div class="modal-header">
+                    <h3>RSVP</h3>
+                    <span class="close-modal" id="closeModal">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <form id="weddingRSVP">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="attending">Will you be attending?</label>
+                            <select id="attending" class="form-control">
+                                <option value="yes">Happily Accepts</option>
+                                <option value="no">Regretfully Declines</option>
+                            </select>
+                        </div>
+                        <div id="attendingOptions">
+                            <div class="form-group">
+                                <label for="guests">Number of Guests (including yourself)</label>
+                                <input type="number" id="guests" class="form-control" min="1" value="1">
+                            </div>
+                            <div class="form-group">
+                                <label for="dietary">Dietary Restrictions</label>
+                                <textarea id="dietary" class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="submit-btn">Submit RSVP</button>
+                    </form>
+                </div>
+            </div>
+            <div id="successMessage" style="display: none;">
+                <div class="success-message">
+                    <div class="success-icon">✓</div>
+                    <h3 class="success-title">Thank You!</h3>
+                    <p class="success-text">Your RSVP has been submitted successfully.</p>
+                    <button class="btn btn-primary" id="closeSuccess">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // RSVP Modal
+        const rsvpModal = document.getElementById('rsvpModal');
+        const rsvpBtn = document.getElementById('rsvpBtn');
+        const rsvpBtnDetails = document.getElementById('rsvpBtnDetails');
+        const closeModal = document.getElementById('closeModal');
+        const closeSuccess = document.getElementById('closeSuccess');
+        const rsvpForm = document.getElementById('rsvpForm');
+        const successMessage = document.getElementById('successMessage');
+        const attendingSelect = document.getElementById('attending');
+        const attendingOptions = document.getElementById('attendingOptions');
+        
+        // Show modal
+        rsvpBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            rsvpModal.classList.add('active');
+        });
+        
+        rsvpBtnDetails.addEventListener('click', (e) => {
+            e.preventDefault();
+            rsvpModal.classList.add('active');
+        });
+        
+        // Close modal
+        closeModal.addEventListener('click', () => {
+            rsvpModal.classList.remove('active');
+        });
+        
+        closeSuccess.addEventListener('click', () => {
+            rsvpModal.classList.remove('active');
+            
+            // Reset form and views after closing
+            setTimeout(() => {
+                rsvpForm.style.display = 'block';
+                successMessage.style.display = 'none';
+                document.getElementById('weddingRSVP').reset();
+            }, 300);
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === rsvpModal) {
+                rsvpModal.classList.remove('active');
+            }
+        });
+        
+        // Toggle attending options
+        attendingSelect.addEventListener('change', () => {
+            if (attendingSelect.value === 'yes') {
+                attendingOptions.style.display = 'block';
+            } else {
+                attendingOptions.style.display = 'none';
+            }
+        });
+        
+        // Form submission
+        document.getElementById('weddingRSVP').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                attending: attendingSelect.value,
+                guests: document.getElementById('guests').value,
+                dietary: document.getElementById('dietary').value
+            };
+            
+            // In a real implementation, you would send this data to a server
+            console.log('Form submitted:', formData);
+            
+            // Show success message
+            rsvpForm.style.display = 'none';
+            successMessage.style.display = 'block';
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (this.getAttribute('href') === '#') return;
+                
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                
+                if (target) {
+                    navLinks.classList.remove('active');
+                    
+                    window.scrollTo({
+                        top: target.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
