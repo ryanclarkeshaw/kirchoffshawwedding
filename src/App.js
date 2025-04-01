@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './App.css';
 
 const WeddingWebsite = () => {
   const [showRSVP, setShowRSVP] = useState(false);
